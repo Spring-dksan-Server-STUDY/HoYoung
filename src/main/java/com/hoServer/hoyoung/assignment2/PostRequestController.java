@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 
@@ -28,8 +29,9 @@ public class PostRequestController {
     // POST /BASE_URL/posts
     @PostMapping()
     @Transactional
-    public String createPost(@RequestBody final Post post){
-        return "post 생성";
+    public Post createPost(@RequestBody final Post post){
+        em.persist(post);
+        return post;
     }
 
     // GET /BASE_URL/posts/{postId}
